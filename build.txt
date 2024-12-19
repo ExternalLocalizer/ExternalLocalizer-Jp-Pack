@@ -1,0 +1,3 @@
+displayName = External Localizer Japanese Pack
+author = eva828
+version = 0.1
