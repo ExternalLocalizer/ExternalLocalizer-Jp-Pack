@@ -1,0 +1,3 @@
+[submodule "Localization/TMLHonyaku"]
+	path = Localization/TMLHonyaku
+	url = https://github.com/ExternalLocalizer/TMLHonyaku
