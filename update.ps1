@@ -9,8 +9,8 @@ if ($gitStatus) {
     exit 1
 }
 
-# # TML Honyakuを更新
-# git submodule update --remote
+# TML Honyakuを更新
+git submodule update --remote
 
 # ファイルパスを指定
 $filePath = ".\build.txt"
@@ -43,6 +43,7 @@ $content = [regex]::replace($content, $versionPattern, {
         return "version = $newVersion"
     });
 
+# 更新後の内容を表示
 Write-Host "New content:"
 Write-Host $content
 
