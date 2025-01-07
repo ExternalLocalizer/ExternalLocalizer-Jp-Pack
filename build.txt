@@ -1,7 +1,7 @@
 displayName = External Localizer Japanese Pack
 author = eva828
 version = 2025.01.03.12
-modReferences = ExternalLocalizer
+modReferences = ExternalLocalizerBeta
 hideResources = true
 side = Client
 homepage = https://github.com/ExternalLocalizer/TMLHonyaku
