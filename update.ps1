@@ -11,6 +11,7 @@ if ($gitStatus) {
 
 # TML Honyakuを更新
 git submodule update --remote
+git add .\Localization\TMLHonyaku
 
 # ファイルパスを指定
 $filePath = ".\build.txt"
