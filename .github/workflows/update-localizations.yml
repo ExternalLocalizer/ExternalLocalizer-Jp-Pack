@@ -8,7 +8,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  echo:
+  update-localizations:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -63,7 +63,7 @@ jobs:
       - name: Commit
         run: |
           git commit -m "Update version to $NEW_VERSION"
-          git push
+          git push -u origin $NEW_VERSION
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
