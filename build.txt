@@ -1,7 +1,0 @@
-displayName = External Localizer Japanese Pack
-author = eva828
-version = 2025.01.15.0
-modReferences = ExternalLocalizerBeta
-hideResources = true
-side = Client
-homepage = https://github.com/ExternalLocalizer/TMLHonyaku
