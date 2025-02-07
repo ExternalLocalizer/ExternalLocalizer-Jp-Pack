@@ -1,5 +1,14 @@
-# ExternalLocalizer-Jp-Pack
-<a target="_blank" href="https://discord.gg/ch2DVxf2jY"><img src="https://dcbadge.limes.pink/api/server/ch2DVxf2jY?style=flat" alt="" /></a>
+<img src="icon_workshop.png" height="75px" align=left alt="logo">
+<H1>ExternalLocalizer-Jp-Pack </H1>
+
+<div style="float:left;">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ExternalLocalizer/ExternalLocalizer-Jp-Pack"/>
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/ExternalLocalizer/ExternalLocalizer-Jp-Pack/update-localizations.yml"/>
+  <a target="_blank" href="https://discord.gg/ch2DVxf2jY">
+    <img alt="Discord Server" src="https://dcbadge.limes.pink/api/server/ch2DVxf2jY?style=flat"/>
+  </a>
+</div>
+
 
 ## 概要
 [TMLHonyaku](https://github.com/ExternalLocalizer/TMLHonyaku)で公開されている日本語化ファイルを、簡単に[ExternalLocalizer](https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249)で使用できるModです。
