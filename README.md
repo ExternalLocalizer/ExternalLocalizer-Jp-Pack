@@ -15,7 +15,7 @@
 現在対応しているModの一覧は[TranslatedMods.csv](https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv)を参照してください。
 
 ## 使い方
-[External Localizer Beta]([https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249](https://steamcommunity.com/sharedfiles/filedetails/?id=3401926459))と[本Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3401890281)をサブスクライブし、ゲーム内のModリストから有効化してください。
+[External Localizer](https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249)と[本Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3401890281)をサブスクライブし、ゲーム内のModリストから有効化してください。
 
 その後ExternalLocalizerの設定画面で、以下の項目が正しく設定されていることを確認してください。
 - `ローカライズを有効化`がオンになっていること
