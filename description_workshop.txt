@@ -1,0 +1,19 @@
+[h1] 概要 [/h1]
+[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyaku[/url]で公開されている日本語化ファイルを、簡単に[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]で使用できるModです。
+現在対応しているModの一覧は[url=https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv]TranslatedMods.csv[/url]を参照してください。
+
+[h1] 使い方 [/h1]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と本Modをサブスクライブし、ゲーム内のModリストから有効化してください。
+その後[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]の設定画面で、以下の項目が正しく設定されていることを確認してください。
+[list]
+  [*]`ローカライズを有効化`がオンになっていること
+  [*]`言語キー`が`ja-JP`に設定されていること
+[/list]
+
+[h1] 注意事項 [/h1]
+[list]
+  [*]本Modは手動更新のため、[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyakuリポジトリ[/url]と比べてやや更新が遅れる可能性があります。
+  [*]本Modは[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyakuリポジトリ[/url]のすべての翻訳用ファイルをロードします。MOD毎に個別に導入したい場合、リポジトリから必要なファイルをダウンロードし、[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]External Localizer[/url]に直接読み込ませてください。
+[/list]
+
+分からないことがあれば、[url=https://discord.gg/ch2DVxf2jY]Discord[/url]もしくはコメント欄にてお問い合わせください。
