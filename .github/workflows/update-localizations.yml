@@ -76,7 +76,7 @@ jobs:
           gh pr create \
           --base master \
           --head $NEW_VERSION \
-          --assignee eva828Dev \
+          --assignee eva828 \
           --title "Update version to $NEW_VERSION" \
           --body "This PR updates the version from $OLD_VERSION to $NEW_VERSION. 
             @eva828Dev Please approve this PR and upload the new version to the Steam Workshop. 
