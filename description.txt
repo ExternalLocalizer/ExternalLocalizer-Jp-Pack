@@ -1,5 +1,7 @@
 ==== 概要 ====
-TMLHonyakuで公開されている日本語化ファイルを、簡単にExternalLocalizerで使用できるModです。
+Japanese PackにはTMLHonyakuで公開されている日本語化ファイルが内蔵されています。
+External Localizerと併用することで、簡単にModを日本語化できます。
+Calamity ModやThorium Modなどの大型Modを含む150以上のModに対応しています。
 現在対応しているModの一覧はTranslatedMods.csvを参照してください。
 
 ==== 使い方 ====

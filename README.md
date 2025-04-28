@@ -11,7 +11,9 @@
 
 
 ## 概要
-[TMLHonyaku][gh-honyaku]で公開されている日本語化ファイルを、簡単に[External Localizer][steam-el]で使用できるModです。
+Japanese Packには[TMLHonyaku][gh-honyaku]で公開されている日本語化ファイルが内蔵されています。
+[External Localizer][steam-el]と併用することで、簡単にModを日本語化できます。
+Calamity ModやThorium Modなどの大型Modを含む150以上のModに対応しています。
 現在対応しているModの一覧は[TranslatedMods.csv][gh-honyaku-csv]を参照してください。
 
 ## 使い方
