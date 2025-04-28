@@ -1,8 +1,20 @@
 [h1] 概要 [/h1]
 Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyaku[/url]で公開されている日本語化ファイルが内蔵されています。
 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と併用することで、簡単にModを日本語化できます。
-[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072]Calamity Mod[/url]や[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2909886416]Thorium Mod[/url]などの大型Modを含む150以上のModに対応しています。
-現在対応しているModの一覧は[url=https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv]TranslatedMods․csv[/url]を参照してください。
+
+[h1] 主な対応Mod [/h1]
+大型Modを含む[b]150以上[/b]のModに対応しています。
+[list]
+  [*]Calamity Mod
+  [*]Thorium Mod
+  [*]Fargo's Souls Mod
+  [*]Boss Cursor
+  [*]Boss Checklist
+  [*]Item Checklist
+  [*]Recipe Browser
+[/list]
+など。
+完全なリストは[url=https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv]TranslatedMods․csv[/url]を参照してください。
 
 [h1] 使い方 [/h1]
 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と本Modをサブスクライブし、ゲーム内のModリストから有効化してください。
