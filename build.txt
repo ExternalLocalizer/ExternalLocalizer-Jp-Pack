@@ -1,6 +1,6 @@
 displayName = External Localizer Japanese Pack
 author = eva828
-version = 2025.04.20.0
+version = 2025.04.28.0
 modReferences = ExternalLocalizer
 hideResources = true
 side = Client
