@@ -13,8 +13,18 @@
 ## 概要
 Japanese Packには[TMLHonyaku][gh-honyaku]で公開されている日本語化ファイルが内蔵されています。
 [External Localizer][steam-el]と併用することで、簡単にModを日本語化できます。
-Calamity ModやThorium Modなどの大型Modを含む150以上のModに対応しています。
-現在対応しているModの一覧は[TranslatedMods.csv][gh-honyaku-csv]を参照してください。
+
+## 主な対応Mod
+大型Modを含む**150以上**のModに対応しています。
+- Calamity Mod
+- Thorium Mod
+- Fargo's Souls Mod
+- Boss Cursor
+- Boss Checklist
+- Item Checklist
+- Recipe Browser
+など。
+完全なリストは[TranslatedMods.csv][gh-honyaku-csv]を参照してください。
 
 ## 使い方
 [External Localizer][steam-el]と[本Mod][steam-eljp]をサブスクライブし、ゲーム内のModリストから有効化してください。
