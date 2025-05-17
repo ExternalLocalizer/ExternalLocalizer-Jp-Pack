@@ -24,6 +24,13 @@ Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonya
   [*]`言語キー`が`ja-JP`に設定されていること
 [/list]
 
+日本語対応フォントを含まないため、文字化けが発生する可能性があります。
+以下のいずれかを併用してください。
+[list]
+  [*]日本語対応フォントに置き換えるMod (例: [Kanamoji Fonts][steam-kanamoji])
+  [*]日本語対応フォントを含むリソースパック (例: [TrJpMod(日本語化パック)][steam-trjp])
+[/list]
+
 [h1] 注意事項 [/h1]
 [list]
   [*]本Modは手動更新のため、[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyakuリポジトリ[/url]と比べてやや更新が遅れる可能性があります。
