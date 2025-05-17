@@ -33,6 +33,12 @@ Japanese Packには[TMLHonyaku][gh-honyaku]で公開されている日本語化�
 - `ローカライズを有効化`がオンになっていること
 - `言語キー`が`ja-JP`に設定されていること
 
+> [!WARNING]
+> 日本語対応フォントを含まないため、文字化けが発生する可能性があります。
+> 以下のいずれかを併用してください。
+> - 日本語対応フォントに置き換えるMod (例: [Kanamoji Fonts][steam-kanamoji])
+> - 日本語対応フォントを含むリソースパック (例: [TrJpMod(日本語化パック)][steam-trjp])
+
 ## 注意事項
 - 本Modは手動更新のため、[TMLHonyakuリポジトリ][gh-honyaku]と比べてやや更新が遅れる可能性があります。
 - 本Modは[TMLHonyakuリポジトリ][gh-honyaku]のすべての翻訳用ファイルをロードします。MOD毎に個別に導入したい場合、リポジトリから必要なファイルをダウンロードし、[External Localizer][steam-el]に直接読み込ませてください。
@@ -41,6 +47,8 @@ Japanese Packには[TMLHonyaku][gh-honyaku]で公開されている日本語化�
 
 [steam-el]:https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249
 [steam-eljp]:https://steamcommunity.com/sharedfiles/filedetails/?id=3401890281
+[steam-kanamoji]:https://steamcommunity.com/sharedfiles/filedetails/?id=2461784420
+[steam-trjp]:https://steamcommunity.com/sharedfiles/filedetails/?id=2865024243
 [gh-honyaku]:https://github.com/ExternalLocalizer/TMLHonyaku
 [gh-honyaku-csv]:https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv
 [discord-invite]:https://discord.gg/ch2DVxf2jY
