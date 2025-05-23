@@ -3,7 +3,7 @@ Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonya
 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と併用することで、簡単にModを日本語化できます。
 
 [h1] 主な対応Mod [/h1]
-大型Modを含む[b]150以上[/b]のModに対応しています。
+大型Modを含む[b]200以上[/b]のModに対応しています。
 [list]
   [*]Calamity Mod
   [*]Thorium Mod
@@ -17,58 +17,8 @@ Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonya
 完全なリストは[url=https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv]TranslatedMods․csv[/url]を参照してください。
 
 [h1] 使い方 [/h1]
-[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と本Modをサブスクライブし、ゲーム内のModリストから有効化してください。
-その後[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]の設定画面で、以下の項目が正しく設定されていることを確認してください。
-[list]
-  [*]`ローカライズを有効化`がオンになっていること
-  [*]`言語キー`が`ja-JP`に設定されていること
-[/list]
-
-日本語対応フォントを含まないため、文字化けが発生する可能性があります。
-以下のいずれかを併用してください。
-[list]
-[h1] 概要 [/h1]
-Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyaku[/url]で公開されている日本語化ファイルが内蔵されています。
-[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と併用することで、簡単にModを日本語化できます。
-
-[h1] 主な対応Mod [/h1]
-大型Modを含む[b]150以上[/b]のModに対応しています。
-[list]
-  [*]Calamity Mod
-  [*]Thorium Mod
-  [*]Fargo's Souls Mod
-  [*]Boss Cursor
-  [*]Boss Checklist
-  [*]Item Checklist
-  [*]Recipe Browser
-[/list]
-など。
-完全なリストは[url=https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv]TranslatedMods․csv[/url]を参照してください。
-
-[h1] 使い方 [/h1]
-[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と本Modをサブスクライブし、ゲーム内のModリストから有効化してください。
-その後[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]の設定画面で、以下の項目が正しく設定されていることを確認してください。
-[list]
-  [*]`ローカライズを有効化`がオンになっていること
-  [*]`言語キー`が`ja-JP`に設定されていること
-[/list]
-
-日本語対応フォントを含まないため、文字化けが発生する可能性があります。
-以下のいずれかを併用してください。
-[list]
-  [*]日本語対応フォントに置き換えるMod (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2581155970]Kanamoji Fonts[/url])
-  [*]日本語対応フォントを含むリソースパック (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2865024243]TrJpMod(日本語化パック)[/url])
-[/list]
-
-[h1] 注意事項 [/h1]
-[list]
-  [*]本Modは手動更新のため、[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyakuリポジトリ[/url]と比べてやや更新が遅れる可能性があります。
-  [*]本Modは[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyakuリポジトリ[/url]のすべての翻訳用ファイルをロードします。MOD毎に個別に導入したい場合、リポジトリから必要なファイルをダウンロードし、[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]External Localizer[/url]に直接読み込ませてください。
-[/list]
-
-分からないことがあれば、[url=https://discord.gg/ch2DVxf2jY]Discord[/url]もしくはコメント欄にてお問い合わせください。
-[quote=tModLoader ExternalLocalizerJpPack]
-Developed By eva828[/quote]
+  [*]日本語対応フォントに置き換えるMod (例: Kanamoji Fonts)
+  [*]日本語対応フォントを含むリソースパック (例: TrJpMod(日本語化パック))
 [/list]
 
 [h1] 注意事項 [/h1]
