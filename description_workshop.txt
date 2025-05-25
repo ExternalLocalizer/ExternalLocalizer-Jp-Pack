@@ -1,3 +1,11 @@
+[h2]⚠️ 文字化けについて ⚠️[/h2]
+日本語対応フォントを含まないため、本Mod単体では文字化けが発生します。
+以下のいずれかを併用してください。
+[list]
+  [*]日本語対応フォントに置き換えるMod (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2581155970]Kanamoji Fonts[/url])
+  [*]日本語対応フォントを含むリソースパック (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2865024243]TrJpMod(日本語化パック)[/url])
+[/list]
+
 [h1] 概要 [/h1]
 Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonyaku[/url]で公開されている日本語化ファイルが内蔵されています。
 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と併用することで、簡単にModを日本語化できます。
