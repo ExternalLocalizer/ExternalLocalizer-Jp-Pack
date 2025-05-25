@@ -3,7 +3,7 @@
 以下のいずれかを併用してください。
 [list]
   [*]日本語対応フォントに置き換えるMod (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2581155970]Kanamoji Fonts[/url])
-  [*]日本語対応フォントを含むリソースパック (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2865024243]TrJpMod(日本語化パック)[/url])
+  [*]日本語対応フォントを含むリソースパック (例: [url=steamcommunity.com/sharedfiles/filedetails/?id=2865024243]TrJpMod[EN] (日本語化パック)[/url])
 [/list]
 
 [h1] 概要 [/h1]
