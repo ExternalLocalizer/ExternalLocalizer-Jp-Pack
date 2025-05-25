@@ -17,8 +17,11 @@ Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonya
 完全なリストは[url=https://github.com/ExternalLocalizer/TMLHonyaku/blob/main/TranslatedMods.csv]TranslatedMods․csv[/url]を参照してください。
 
 [h1] 使い方 [/h1]
-  [*]日本語対応フォントに置き換えるMod (例: Kanamoji Fonts)
-  [*]日本語対応フォントを含むリソースパック (例: TrJpMod(日本語化パック))
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と本Modをサブスクライブし、ゲーム内のModリストから有効化してください。
+その後[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]の設定画面で、以下の項目が正しく設定されていることを確認してください。
+[list]
+  [*]`ローカライズを有効化`がオンになっていること
+  [*]`言語キー`が`ja-JP`に設定されていること
 [/list]
 
 [h1] 注意事項 [/h1]
