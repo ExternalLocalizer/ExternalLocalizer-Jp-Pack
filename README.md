@@ -7,6 +7,9 @@
   <a target="_blank" href="https://discord.gg/ch2DVxf2jY">
     <img alt="Discord Server" src="https://dcbadge.limes.pink/api/server/ch2DVxf2jY?style=flat"/>
   </a>
+  <a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3401890281">
+    <img alt="Steam Subscriptions" src="https://img.shields.io/steam/subscriptions/3401890281?logo=steam&label=Steam&labelColor=1b2838&color=3d5266">
+  </a>
 </div>
 
 
