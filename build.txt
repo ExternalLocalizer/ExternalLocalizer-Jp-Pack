@@ -5,3 +5,4 @@ modReferences = ExternalLocalizer
 hideResources = true
 side = Client
 homepage = https://github.com/ExternalLocalizer/ExternalLocalizer-Jp-Pack
+buildIgnore = *.xcf

@@ -1,1 +1,66 @@
+Configs: {
+	Config: {
+		DisplayName: 設定
 
+		EnableJapaneseModIcon: {
+			Label: 日本語化アイコンを有効化
+			Tooltip:
+				'''
+				External Localizer Japanese Packにより日本語化されたModに対して、
+				Modリストに日本語化済みを示すアイコンを表示します。
+				'''
+		}
+
+		DisplayTranslatorsInTooltip: {
+			Label: アイコンのツールチップに翻訳者を表示
+			Tooltip: ""
+		}
+
+		DisplayNoteInTooltip: {
+			Label: アイコンのツールチップに注記を表示
+			Tooltip: ""
+		}
+
+		EnableOutdatedAlertIcon: {
+			Label: 翻訳データが古いModに警告アイコンを表示
+			Tooltip:
+				'''
+				Mod本体の更新に翻訳が追いついていない場合、一部のテキストが未翻訳、
+				または古い情報のままになるなど不具合が発生する可能性があります。
+
+				そのようなModに対して、アイコンに警告を追加します。
+
+				ただし、必要以上に更新を促すことになるため、デフォルトでは無効化されています。
+				必要に応じて有効化してください。
+				'''
+		}
+
+		DisplayOutdatedVersionWarn: {
+			Label: 翻訳データが古いModのツールチップに警告を表示
+			Tooltip:
+				'''
+				Mod本体の更新に翻訳が追いついていない場合、一部のテキストが未翻訳、
+				または古い情報のままになるなど不具合が発生する可能性があります。
+
+				そのようなModに対して、ツールチップに警告を追加します。
+				'''
+		}
+	}
+}
+
+ModListTooltip: {
+	Version: "[c/65fa55:翻訳済み v{0}]"
+	OutdatedVersion: "[c/65fa55:翻訳済み v{0}] - [c/e6c05a:最新バージョン v{1}]"
+	OutdatedVersionWarn:
+		'''
+		[c/e6c05a:Mod本体の更新に翻訳が追いついていないため、]
+		[c/e6c05a:一部のテキストが未翻訳、または古い情報のままに]
+		[c/e6c05a:なっている場合があります。]
+
+		[c/e6c05a:不具合を見つけた際は、GitHubか]
+		[c/e6c05a:公式Discordまでご報告ください！]
+		'''
+	Translators: "[c/858585:翻訳者]"
+	Note: "[c/858585:注記]"
+	Click: "[c/606060:《左クリックでGitHubを開く》]"
+}
