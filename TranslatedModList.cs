@@ -44,7 +44,8 @@ internal class CsvEntry
     public string InternalName { get; set; } = null!;
     public Version Version { get; set; } = null!;
     public string Translators { get; set; } = null!;
-    public string Note { get; set; } = null!;
+    public string InternalNote { get; set; } = null!;
+    public string DisplayNote { get; set; } = null!;
 
     public class Mapper : CsvHelper.Configuration.CsvClassMap<CsvEntry>
     {
@@ -55,7 +56,8 @@ internal class CsvEntry
             this.Map(m => m.InternalName).Name("internal_name");
             this.Map(m => m.Version).Name("version").TypeConverter<VersionConverter>();
             this.Map(m => m.Translators).Name("translators");
-            this.Map(m => m.Note).Name("note").Default(string.Empty);
+            this.Map(m => m.InternalNote).Name("internal_note").Default(string.Empty);
+            this.Map(m => m.DisplayNote).Name("display_note").Default(string.Empty);
         }
 
         public class VersionConverter : CsvHelper.TypeConversion.ITypeConverter

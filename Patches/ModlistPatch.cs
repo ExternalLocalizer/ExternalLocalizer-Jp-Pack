@@ -203,10 +203,10 @@ internal class ModlistPatch : ModSystem
             builder.AppendLine();
         }
 
-        if (Config.Instance.DisplayNoteInTooltip && !string.IsNullOrEmpty(modEntry.Note))
+        if (Config.Instance.DisplayNoteInTooltip && !string.IsNullOrEmpty(modEntry.DisplayNote))
         {
             builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.Note").Value);
-            builder.AppendLine(WrapText(modEntry.Note));
+            builder.AppendLine(WrapText(modEntry.DisplayNote));
             builder.AppendLine();
         }
 
