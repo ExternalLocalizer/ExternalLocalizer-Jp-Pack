@@ -1,0 +1,132 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"gruntfuggly.triggertaskonsave",
+			"ms-dotnettools.csharp",
+			"ms-dotnettools.csdevkit",
+			"wayou.vscode-todo-highlight",
+			"gruntfuggly.todo-tree",
+			"editorconfig.editorconfig"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"type": "dotnet",
+				"task": "build",
+				"group": "build",
+				"problemMatcher": [],
+				"label": "dotnet: build"
+			},
+			{
+				"label": "Format Whole Solution",
+				"type": "shell",
+				"command": "dotnet",
+				"args": [
+					"format",
+					"ExternalLocalizerJpPack.sln",
+					"-v",
+					"diag"
+				],
+				"options": {
+					"cwd": "${workspaceFolder}"
+				},
+			},
+			{
+				"label": "Format Current File",
+				"type": "shell",
+				"command": "dotnet",
+				"args": [
+					"format",
+					"ExternalLocalizerJpPack.sln",
+					"--include",
+					"${relativeFile}",
+					"-v",
+					"diag"
+				],
+				"presentation": {
+					"echo": true,
+					"reveal": "silent",
+					"focus": false,
+					"panel": "dedicated",
+					"showReuseMessage": false,
+					"clear": true
+				},
+				"options": {
+					"cwd": "${workspaceFolder}"
+				},
+			}
+		]
+	},
+	"settings": {
+		// Explore
+		"files.exclude": {
+			"**/.DS_Store": true,
+			"**/.git": true,
+			"**/.vs": true,
+			"**/.gitmodules": true,
+			"**/.vsconfig": true,
+			"bin/": true,
+			"obj/": true,
+		},
+		// Editor
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "always",
+			"source.fixAll": "always",
+		},
+		// CSharp
+		"csharp.suppressHiddenDiagnostics": false,
+		// Dotnet
+		"dotnet.defaultSolution": "ExternalLocalizerJpPack.sln",
+		"dotnet.backgroundAnalysis.compilerDiagnosticsScope": "fullSolution",
+		"dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "fullSolution",
+		// TriggerTaskOnSave
+		"triggerTaskOnSave.on": true,
+		"triggerTaskOnSave.showBusyIndicator": true,
+		"triggerTaskOnSave.selectedTask": "Format Current File",
+		"triggerTaskOnSave.showStatusBarToggle": true,
+		"triggerTaskOnSave.tasks": {
+			"Format Current File": [
+				"**/*.cs"
+			]
+		},
+		// TODO
+		"todo-tree.highlights.enabled": false,
+		"todohighlight.defaultStyle": {
+			"color": "red",
+			"overviewRulerColor": "#ffab00",
+			"cursor": "pointer",
+			"border": "1px solid #eee",
+			"borderRadius": "3px",
+			"isWholeLine": true,
+		},
+		"todohighlight.keywords": [
+			{
+				"text": "TODO:",
+				"color": "hsl(55 24 61)",
+				"border": "1px solid hsl(55 24 61 / 0.2)",
+				"backgroundColor": "hsl(55 24 61 / 0.1)",
+			},
+			{
+				"text": "NOTE:",
+				"color": "hsl(105 24 61)",
+				"border": "1px solid hsl(105 24 61 / 0.2)",
+				"backgroundColor": "hsl(105 24 61 / 0.1)",
+			},
+			{
+				"text": "FIXME:",
+				"color": "hsl(304 24 61)",
+				"border": "1px solid hsl(304 24 61 / 0.2)",
+				"backgroundColor": "hsl(304 24 61 / 0.1)",
+			}
+		],
+		"triggerTaskOnSave.restart": true,
+	}
+}
