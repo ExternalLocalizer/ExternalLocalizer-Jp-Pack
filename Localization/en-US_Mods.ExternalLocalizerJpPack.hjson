@@ -57,8 +57,8 @@ ModListTooltip: {
 		[c/e6c05a:一部のテキストが未翻訳、または古い情報のままに]
 		[c/e6c05a:なっている場合があります。]
 
-		[c/e6c05a:不具合を見つけた際は、GitHubか]
-		[c/e6c05a:公式Discordまでご報告ください！]
+		[c/e6c05a:不具合を見つけた際は、GitHubか公式Discordまで]
+		[c/e6c05a:ご報告ください！]
 		'''
 	Translators: "[c/858585:翻訳者]"
 	Note: "[c/858585:注記]"

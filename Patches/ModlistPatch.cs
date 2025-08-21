@@ -188,12 +188,6 @@ internal class ModlistPatch : ModSystem
         {
             builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.OutdatedVersion").Format(modEntry.Version, latestVersion));
             builder.AppendLine();
-
-            if (Config.Instance.DisplayOutdatedVersionWarn)
-            {
-                builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.OutdatedVersionWarn").Value);
-                builder.AppendLine();
-            }
         }
 
         if (Config.Instance.DisplayTranslatorsInTooltip)
@@ -207,6 +201,12 @@ internal class ModlistPatch : ModSystem
         {
             builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.Note").Value);
             builder.AppendLine(WrapText(modEntry.DisplayNote));
+            builder.AppendLine();
+        }
+
+        if (modEntry.Version < latestVersion && Config.Instance.DisplayOutdatedVersionWarn)
+        {
+            builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.OutdatedVersionWarn").Value);
             builder.AppendLine();
         }
 
