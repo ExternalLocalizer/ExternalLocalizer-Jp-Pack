@@ -9,6 +9,7 @@ internal class Config : ModConfig
     public override ConfigScope Mode => ConfigScope.ClientSide;
     public static Config Instance => ModContent.GetInstance<Config>();
 
+    [Header("Icon")]
     [DefaultValue(true)]
     [ReloadRequired]
     public bool EnableJapaneseModIcon { get; set; }
@@ -16,6 +17,7 @@ internal class Config : ModConfig
     [DefaultValue(false)]
     public bool EnableOutdatedAlertIcon { get; set; }
 
+    [Header("Tooltip")]
     [DefaultValue(false)]
     public bool DisplayTranslatorsInTooltip { get; set; }
 

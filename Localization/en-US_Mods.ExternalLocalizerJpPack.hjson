@@ -3,7 +3,7 @@ Configs: {
 		DisplayName: 設定
 
 		EnableJapaneseModIcon: {
-			Label: 日本語化アイコンを有効化
+			Label: 日本語化済みを示すアイコンを有効化
 			Tooltip:
 				'''
 				External Localizer Japanese Packにより日本語化されたModに対して、
@@ -22,7 +22,7 @@ Configs: {
 		}
 
 		EnableOutdatedAlertIcon: {
-			Label: 翻訳データが古いModに警告アイコンを表示
+			Label: アイコンにバージョン違いの警告を表示
 			Tooltip:
 				'''
 				Mod本体の更新に翻訳が追いついていない場合、一部のテキストが未翻訳、
@@ -36,7 +36,7 @@ Configs: {
 		}
 
 		DisplayOutdatedVersionWarn: {
-			Label: 翻訳データが古いModのツールチップに警告を表示
+			Label: アイコンのツールチップにバージョン違いの警告を表示
 			Tooltip:
 				'''
 				Mod本体の更新に翻訳が追いついていない場合、一部のテキストが未翻訳、
@@ -44,6 +44,11 @@ Configs: {
 
 				そのようなModに対して、ツールチップに警告を追加します。
 				'''
+		}
+
+		Headers: {
+			Icon: アイコンの設定
+			Tooltip: ツールチップの設定
 		}
 	}
 }
