@@ -53,8 +53,8 @@ internal class ModlistPatch : ModSystem
         var csvEntry = new VariableDefinition(csvEntryType);
         il.Method.Body.Variables.Add(csvEntry);
 
-        var styleDimensionType = il.Method.Module.ImportReference(s_uIHoverImageType);
-        var uIHoverImage = new VariableDefinition(csvEntryType);
+        var uIHoverImageType = il.Method.Module.ImportReference(s_uIHoverImageType);
+        var uIHoverImage = new VariableDefinition(uIHoverImageType);
         il.Method.Body.Variables.Add(uIHoverImage);
 
         var versionType = il.Method.Module.ImportReference(typeof(Version));
