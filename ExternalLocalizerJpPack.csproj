@@ -1,16 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-	<!-- Import tModLoader mod properties -->
 	<Import Project="..\tModLoader.targets" />
-
-	<!-- General -->
 	<PropertyGroup>
-		
+		<AssemblyName>ExternalLocalizerJpPack</AssemblyName>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
-
-	<!-- References -->
-	<ItemGroup>
-		
-	</ItemGroup>
-
 </Project>
