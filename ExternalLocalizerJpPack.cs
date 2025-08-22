@@ -6,7 +6,7 @@ public class ExternalLocalizerJpPack : Mod
 {
     internal static ExternalLocalizerJpPack Instance { get; private set; } = null!;
 
-    private ExternalLocalizerJpPack()
+    public ExternalLocalizerJpPack()
     {
         Instance = this;
     }
