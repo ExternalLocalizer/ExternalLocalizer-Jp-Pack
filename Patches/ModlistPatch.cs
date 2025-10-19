@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -28,6 +29,8 @@ internal class ModlistPatch : ModSystem
     private static Type s_uIHoverImageType => s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.UI.UIHoverImage");
     private static Type s_localModType => s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.Core.LocalMod");
 
+    private static readonly ConditionalWeakTable<UIElement, UIElement> s_iconElements = new();
+
     public override void Load()
     {
         if (!Config.Instance.EnableJapaneseModIcon)
@@ -38,10 +41,28 @@ internal class ModlistPatch : ModSystem
         s_alertIconTexture ??= this.Mod.Assets.Request<Texture2D>("Images/icon_ja_small_alert");
 
         // Edit the UIModItem to add the Japanese icon
-        MonoModHooks.Modify(s_uIModItemType.GetMethodOrThrow("OnInitialize"), this.DoPatch);
+        if (ModLoader.TryGetMod("ConciseModList", out Mod conciseModList))
+        {
+            // ConciseModList
+            var conciseUIModItemType = conciseModList.GetType().Assembly.GetTypeOrThrow("ConciseModList.ConciseUIModItem");
+            MonoModHooks.Modify(conciseUIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIcon(il, left: new StyleDimension(-21, 1f), top: new StyleDimension(21, 0f)));
+            MonoModHooks.Add(conciseUIModItemType.GetMethodOrThrow("HoveringOnAnyElement"), Modified_HoveringOnAnyElement);
+            MonoModHooks.Modify(conciseUIModItemType.GetMethodOrThrow("LeftClickEvent"), (il) => { }); // なぜかこれがないとHoveringOnAnyElementのフックが動作しない
+        }
+        else
+        {
+            // Default Mod List
+            MonoModHooks.Modify(s_uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIcon(il, left: new StyleDimension(-46, 1f), top: new StyleDimension(0, 0f)));
+        }
     }
 
-    private void DoPatch(ILContext il)
+    private static bool Modified_HoveringOnAnyElement(Func<UIElement, bool, bool> orig, UIElement element, bool checkOnly)
+    {
+        return (s_iconElements.TryGetValue(element, out var iconElement) && iconElement.IsMouseHovering) || orig.Invoke(element, checkOnly);
+
+    }
+
+    private static void AddJapaneseModIcon(ILContext il, StyleDimension left = default, StyleDimension top = default)
     {
         ILCursor c = new(il);
 
@@ -132,12 +153,18 @@ internal class ModlistPatch : ModSystem
 
         c.EmitDup();
         c.EmitLdflda(typeof(UIElement).GetFieldOrThrow("Left"));
-        c.EmitLdcR4(-46);
+        c.EmitDup();
+        c.EmitLdcR4(left.Pixels);
         c.EmitStfld(typeof(StyleDimension).GetFieldOrThrow("Pixels"));
+        c.EmitLdcR4(left.Precent);
+        c.EmitCall(typeof(StyleDimension).GetMethodOrThrow("set_Percent"));
 
         c.EmitDup();
-        c.EmitLdflda(typeof(UIElement).GetFieldOrThrow("Left"));
-        c.EmitLdcR4(1);
+        c.EmitLdflda(typeof(UIElement).GetFieldOrThrow("Top"));
+        c.EmitDup();
+        c.EmitLdcR4(top.Pixels);
+        c.EmitStfld(typeof(StyleDimension).GetFieldOrThrow("Pixels"));
+        c.EmitLdcR4(top.Precent);
         c.EmitCall(typeof(StyleDimension).GetMethodOrThrow("set_Percent"));
 
         // Set click event
@@ -145,7 +172,7 @@ internal class ModlistPatch : ModSystem
         c.EmitLdloc(modName);
         c.EmitDelegate<Action<UIElement, string>>((element, modName) =>
         {
-            element.OnLeftClick += (_, _) =>
+            element.OnLeftClick += (evt, _) =>
             {
                 SoundEngine.PlaySound(SoundID.MenuOpen);
                 var url = $"https://github.com/ExternalLocalizer/TMLHonyaku/tree/main/{modName}";
@@ -167,12 +194,20 @@ internal class ModlistPatch : ModSystem
         c.EmitLdloc(uIHoverImage);
         c.EmitCall(typeof(UIElement).GetMethodOrThrow("Append"));
 
+        // Store UIHoverImage in s_iconElements for hover detection
+        c.EmitLdsfld(typeof(ModlistPatch).GetFieldOrThrow("s_iconElements"));
+        c.EmitLdarg0();
+        c.EmitLdloc(uIHoverImage);
+        c.EmitCall(typeof(ConditionalWeakTable<UIElement, UIElement>).GetMethodOrThrow("Add"));
+
         c.MarkLabel(label2);
 
         // Set the xOffset for the next element
-        c.GotoNext((i) => i.Previous.MatchLdcI4(-40) && i.MatchStloc(out _));
-        c.EmitLdloc(xOffset);
-        c.EmitAdd();
+        if (c.TryGotoNext((i) => i.Previous.MatchLdcI4(-40) && i.MatchStloc(out _)))
+        {
+            c.EmitLdloc(xOffset);
+            c.EmitAdd();
+        }
     }
 
     internal static string CreateHoverText(CsvEntry modEntry, Version latestVersion)
