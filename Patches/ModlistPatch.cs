@@ -46,7 +46,9 @@ internal class ModlistPatch : ModSystem
             // ConciseModList
             var conciseUIModItemType = conciseModList.GetType().Assembly.GetTypeOrThrow("ConciseModList.ConciseUIModItem");
             MonoModHooks.Modify(conciseUIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIcon(il, left: new StyleDimension(-21, 1f), top: new StyleDimension(21, 0f)));
-            MonoModHooks.Add(conciseUIModItemType.GetMethodOrThrow("HoveringOnAnyElement"), Modified_HoveringOnAnyElement);
+
+            var modifier = (Func<UIElement, bool, bool> orig, UIElement element, bool checkOnly) => (s_iconElements.TryGetValue(element, out var iconElement) && iconElement.IsMouseHovering) || orig.Invoke(element, checkOnly);
+            MonoModHooks.Add(conciseUIModItemType.GetMethodOrThrow("HoveringOnAnyElement"), modifier);
             MonoModHooks.Modify(conciseUIModItemType.GetMethodOrThrow("LeftClickEvent"), (il) => { }); // なぜかこれがないとHoveringOnAnyElementのフックが動作しない
         }
         else
@@ -54,12 +56,6 @@ internal class ModlistPatch : ModSystem
             // Default Mod List
             MonoModHooks.Modify(s_uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIcon(il, left: new StyleDimension(-46, 1f), top: new StyleDimension(0, 0f)));
         }
-    }
-
-    private static bool Modified_HoveringOnAnyElement(Func<UIElement, bool, bool> orig, UIElement element, bool checkOnly)
-    {
-        return (s_iconElements.TryGetValue(element, out var iconElement) && iconElement.IsMouseHovering) || orig.Invoke(element, checkOnly);
-
     }
 
     private static void AddJapaneseModIcon(ILContext il, StyleDimension left = default, StyleDimension top = default)
