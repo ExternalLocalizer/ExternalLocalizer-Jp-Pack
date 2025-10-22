@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -25,7 +27,6 @@ internal class ModlistPatch : ModSystem
     private static Asset<Texture2D> s_alertIconTexture = null!;
 
     private static Assembly s_tmlAssembly => typeof(ModLoader).Assembly;
-    private static Type s_uIModItemType => s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.UI.UIModItem");
     private static Type s_uIHoverImageType => s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.UI.UIHoverImage");
     private static Type s_localModType => s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.Core.LocalMod");
 
@@ -44,35 +45,158 @@ internal class ModlistPatch : ModSystem
         if (ModLoader.TryGetMod("ConciseModList", out Mod conciseModList))
         {
             // ConciseModList
-            var conciseUIModItemType = conciseModList.GetType().Assembly.GetTypeOrThrow("ConciseModList.ConciseUIModItem");
-            MonoModHooks.Modify(conciseUIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIcon(il, left: new StyleDimension(-21, 1f), top: new StyleDimension(21, 0f)));
+            // https://github.com/Cyrillya/ConciseModList
+            var uIModItemType = conciseModList.GetType().Assembly.GetTypeOrThrow("ConciseModList.ConciseUIModItem");
+            MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToDefaultModList(il, uIModItemType, left: new StyleDimension(-21, 1f), top: new StyleDimension(21, 0f)));
 
             var modifier = (Func<UIElement, bool, bool> orig, UIElement element, bool checkOnly) => (s_iconElements.TryGetValue(element, out var iconElement) && iconElement.IsMouseHovering) || orig.Invoke(element, checkOnly);
-            MonoModHooks.Add(conciseUIModItemType.GetMethodOrThrow("HoveringOnAnyElement"), modifier);
-            MonoModHooks.Modify(conciseUIModItemType.GetMethodOrThrow("LeftClickEvent"), (il) => { }); // なぜかこれがないとHoveringOnAnyElementのフックが動作しない
+            MonoModHooks.Add(uIModItemType.GetMethodOrThrow("HoveringOnAnyElement"), modifier);
+            MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("LeftClickEvent"), (il) => { }); // なぜかこれがないとHoveringOnAnyElementのフックが動作しない
+        }
+        else if (ModLoader.TryGetMod("ModManager", out Mod modManager))
+        {
+            // Mod Manager
+            // https://github.com/Drovyng/ModManager
+            var uIModItemType = modManager.GetType().Assembly.GetTypeOrThrow("ModManager.Content.ModsList.UIModItemNew");
+            MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToModManager(il, uIModItemType));
         }
         else
         {
             // Default Mod List
-            MonoModHooks.Modify(s_uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIcon(il, left: new StyleDimension(-46, 1f), top: new StyleDimension(0, 0f)));
+            // https://github.com/tModLoader/tModLoader
+            var uIModItemType = s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.UI.UIModItem");
+            MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToDefaultModList(il, uIModItemType, left: new StyleDimension(-46, 1f), top: new StyleDimension(0, 0f)));
         }
     }
 
-    private static void AddJapaneseModIcon(ILContext il, StyleDimension left = default, StyleDimension top = default)
+    private static void AddJapaneseModIconToModManager(ILContext il, Type uIModItemType)
     {
         ILCursor c = new(il);
-
-        var intType = il.Method.Module.ImportReference(typeof(int));
-        var xOffset = new VariableDefinition(intType);
-        il.Method.Body.Variables.Add(xOffset);
-
-        var csvEntryType = il.Method.Module.ImportReference(typeof(CsvEntry));
-        var csvEntry = new VariableDefinition(csvEntryType);
-        il.Method.Body.Variables.Add(csvEntry);
 
         var uIHoverImageType = il.Method.Module.ImportReference(s_uIHoverImageType);
         var uIHoverImage = new VariableDefinition(uIHoverImageType);
         il.Method.Body.Variables.Add(uIHoverImage);
+
+        var label1 = c.DefineLabel();
+
+        // Goto end of method
+        c.GotoNext((i) => i.MatchCall("ModManager.Content.ModsList.UIModItemNew", "Redesign"));
+
+        // Create Japanese Icon
+        CreateJapaneseIcon(il, c, uIHoverImage, localModField: uIModItemType.GetFieldOrThrow("mod"));
+
+        // Check if icon is null
+        c.EmitLdloc(uIHoverImage);
+        c.EmitLdnull();
+        c.EmitCeq();
+        c.EmitBrtrue(label1);
+
+        // Set position
+        c.EmitLdloc(uIHoverImage);
+        c.EmitLdarg0();
+        c.EmitLdfld(uIModItemType.GetFieldOrThrow("flagsMarkers"));
+        c.EmitDelegate<Func<UIElement, float>>((flagsMarkers) => -flagsMarkers.Children.DefaultIfEmpty().Min(e => e?.Left.Pixels ?? 0));
+        c.EmitDelegate((UIImage element, float offset) =>
+        {
+            element.NormalizedOrigin = Vector2.One * 0.5f;
+            element.VAlign = 0.5f;
+            element.HAlign = 1f;
+            element.Left = new() { Pixels = -(offset + element.Width.Pixels) };
+            // element.Width = new() { Pixels = 22 };
+            // element.Height = new() { Pixels = 22 };
+        });
+
+        // Set update event to show tooltip
+        c.EmitLdloc(uIHoverImage);
+        c.EmitDelegate<Action<UIElement>>((element) =>
+            {
+                var uIModsNewType = uIModItemType.Assembly.GetTypeOrThrow("ModManager.Content.ModsList.UIModsNew");
+                var instance = uIModsNewType.GetMethodOrThrow("get_Instance").Invoke(null, null);
+                var toolTipField = uIModsNewType.GetFieldOrThrow("Tooltip");
+                element.OnUpdate += (_) =>
+                {
+                    if (element.IsMouseHovering)
+                    {
+                        var org = s_uIHoverImageType.GetFieldOrThrow("HoverText").GetValue(element);
+                        toolTipField.SetValue(instance, org);
+                    }
+                };
+            }
+        );
+
+        // Append to flagsMarkers
+        c.EmitLdarg0();
+        c.EmitLdfld(uIModItemType.GetFieldOrThrow("flagsMarkers"));
+        c.EmitLdloc(uIHoverImage);
+        c.EmitCall(typeof(UIElement).GetMethodOrThrow("Append"));
+
+        c.MarkLabel(label1);
+        c.EmitNop();
+    }
+
+    private static void AddJapaneseModIconToDefaultModList(ILContext il, Type uIModItemType, StyleDimension left = default, StyleDimension top = default)
+    {
+        ILCursor c = new(il);
+
+        var uIHoverImageType = il.Method.Module.ImportReference(s_uIHoverImageType);
+        var uIHoverImage = new VariableDefinition(uIHoverImageType);
+        il.Method.Body.Variables.Add(uIHoverImage);
+        var boolType = il.Method.Module.ImportReference(typeof(bool));
+        var isIconNull = new VariableDefinition(boolType);
+        il.Method.Body.Variables.Add(isIconNull);
+
+        var label1 = c.DefineLabel();
+        var label2 = c.DefineLabel();
+
+        c.GotoNext((i) => i.MatchLdfld("Terraria.ModLoader.Core.LocalMod", "location"));
+        c.GotoNext(MoveType.After, (i) => i.MatchCall("Terraria.UI.UIElement", "Append"));
+
+        // Create Japanese Icon
+        CreateJapaneseIcon(il, c, uIHoverImage, localModField: uIModItemType.GetFieldOrThrow("_mod"));
+
+        // Check if the icon element is null
+        c.EmitLdloc(uIHoverImage);
+        c.EmitLdnull();
+        c.EmitCeq();
+        c.EmitDup();
+        c.EmitStloc(isIconNull);
+        c.EmitBrtrue(label1);
+
+        // Set position
+        c.EmitLdloc(uIHoverImage);
+        c.EmitDelegate((UIImage element) =>
+        {
+            element.Left = left;
+            element.Top = top;
+        });
+
+        // Append to Parent
+        c.EmitLdarg0();
+        c.EmitLdloc(uIHoverImage);
+        c.EmitCall(typeof(UIElement).GetMethodOrThrow("Append"));
+
+        c.MarkLabel(label1);
+        c.EmitNop();
+
+        // Set the xOffset for the next element
+        if (c.TryGotoNext((i) => i.Previous.MatchLdcI4(-40) && i.MatchStloc(out _)))
+        {
+            c.EmitLdloc(isIconNull);
+            c.EmitBrtrue(label2);
+
+            c.EmitLdloc(24);
+            c.EmitAdd();
+
+            c.MarkLabel(label2);
+            c.EmitNop();
+        }
+    }
+
+    private static void CreateJapaneseIcon(ILContext il, ILCursor c, VariableDefinition uIHoverImage, FieldInfo localModField)
+    {
+        var csvEntryType = il.Method.Module.ImportReference(typeof(CsvEntry));
+        var csvEntry = new VariableDefinition(csvEntryType);
+        il.Method.Body.Variables.Add(csvEntry);
 
         var versionType = il.Method.Module.ImportReference(typeof(Version));
         var latestVersion = new VariableDefinition(versionType);
@@ -82,18 +206,15 @@ internal class ModlistPatch : ModSystem
         var modName = new VariableDefinition(stringType);
         il.Method.Body.Variables.Add(modName);
 
-        c.GotoNext((i) => i.MatchLdfld("Terraria.ModLoader.Core.LocalMod", "location"));
-        c.GotoNext(MoveType.After, (i) => i.MatchCall("Terraria.UI.UIElement", "Append"));
-
         // Get Mod Name
         c.EmitLdarg0();
-        c.EmitLdfld(s_uIModItemType.GetFieldOrThrow("_mod"));
+        c.EmitLdfld(localModField);
         c.EmitCallvirt(s_localModType.GetMethodOrThrow("get_Name"));
         c.EmitStloc(modName);
 
         // Get latest version
         c.EmitLdarg0();
-        c.EmitLdfld(s_uIModItemType.GetFieldOrThrow("_mod"));
+        c.EmitLdfld(localModField);
         c.EmitCallvirt(s_localModType.GetMethodOrThrow("get_Version"));
         c.EmitStloc(latestVersion);
 
@@ -108,16 +229,8 @@ internal class ModlistPatch : ModSystem
         c.EmitLdloc(csvEntry);
         c.EmitBrtrue(label1);
 
-        // skip the rest of the patch if CsvEntry is null
-        c.EmitLdcI4(0);
-        c.EmitStloc(xOffset); // Set xOffset to 0
         c.EmitBr(label2); // Skip to the end of the patch
-
         c.MarkLabel(label1);
-
-        // Set xOffset to -30
-        c.EmitLdcI4(-24);
-        c.EmitStloc(xOffset);
 
         // Load Texture
         c.EmitLdloc(csvEntry);
@@ -147,22 +260,6 @@ internal class ModlistPatch : ModSystem
         c.EmitLdcI4(1);
         c.EmitStfld(s_uIHoverImageType.GetFieldOrThrow("UseTooltipMouseText"));
 
-        c.EmitDup();
-        c.EmitLdflda(typeof(UIElement).GetFieldOrThrow("Left"));
-        c.EmitDup();
-        c.EmitLdcR4(left.Pixels);
-        c.EmitStfld(typeof(StyleDimension).GetFieldOrThrow("Pixels"));
-        c.EmitLdcR4(left.Precent);
-        c.EmitCall(typeof(StyleDimension).GetMethodOrThrow("set_Percent"));
-
-        c.EmitDup();
-        c.EmitLdflda(typeof(UIElement).GetFieldOrThrow("Top"));
-        c.EmitDup();
-        c.EmitLdcR4(top.Pixels);
-        c.EmitStfld(typeof(StyleDimension).GetFieldOrThrow("Pixels"));
-        c.EmitLdcR4(top.Precent);
-        c.EmitCall(typeof(StyleDimension).GetMethodOrThrow("set_Percent"));
-
         // Set click event
         c.EmitDup();
         c.EmitLdloc(modName);
@@ -185,11 +282,6 @@ internal class ModlistPatch : ModSystem
 
         c.EmitStloc(uIHoverImage);
 
-        // Append to Parent
-        c.EmitLdarg0();
-        c.EmitLdloc(uIHoverImage);
-        c.EmitCall(typeof(UIElement).GetMethodOrThrow("Append"));
-
         // Store UIHoverImage in s_iconElements for hover detection
         c.EmitLdsfld(typeof(ModlistPatch).GetFieldOrThrow("s_iconElements"));
         c.EmitLdarg0();
@@ -197,13 +289,6 @@ internal class ModlistPatch : ModSystem
         c.EmitCall(typeof(ConditionalWeakTable<UIElement, UIElement>).GetMethodOrThrow("Add"));
 
         c.MarkLabel(label2);
-
-        // Set the xOffset for the next element
-        if (c.TryGotoNext((i) => i.Previous.MatchLdcI4(-40) && i.MatchStloc(out _)))
-        {
-            c.EmitLdloc(xOffset);
-            c.EmitAdd();
-        }
     }
 
     internal static string CreateHoverText(CsvEntry modEntry, Version latestVersion)
