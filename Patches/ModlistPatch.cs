@@ -2,6 +2,9 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using ExternalLocalizerJpPack.Config;
+using ExternalLocalizerJpPack.Data;
+using ExternalLocalizerJpPack.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
@@ -19,7 +22,7 @@ using Terraria.UI;
 
 using Version = System.Version;
 
-namespace ExternalLocalizerJpPack;
+namespace ExternalLocalizerJpPack.Patches;
 
 internal class ModlistPatch : ModSystem
 {
@@ -37,7 +40,7 @@ internal class ModlistPatch : ModSystem
 
     public override void Load()
     {
-        if (!Config.Instance.EnableJapaneseModIcon)
+        if (!ModListConfig.Instance.EnableJapaneseModIcon)
             return;
 
         // Load the icon textures
@@ -301,7 +304,7 @@ internal class ModlistPatch : ModSystem
         c.EmitLdloc(latestVersion);
         c.EmitDelegate<Func<CsvEntry, Version, Asset<Texture2D>>>((modEntry, latestVersion) =>
         {
-            if (!Config.Instance.EnableOutdatedAlertIcon)
+            if (!ModListConfig.Instance.EnableOutdatedAlertIcon)
                 return s_iconTexture;
 
             return modEntry.Version < latestVersion ? s_alertIconTexture : s_iconTexture;
@@ -361,21 +364,21 @@ internal class ModlistPatch : ModSystem
             builder.AppendLine();
         }
 
-        if (Config.Instance.DisplayTranslatorsInTooltip)
+        if (ModListConfig.Instance.DisplayTranslatorsInTooltip)
         {
             builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.Translators").Value);
             builder.AppendLine(WrapText(modEntry.Translators));
             builder.AppendLine();
         }
 
-        if (Config.Instance.DisplayNoteInTooltip && !string.IsNullOrEmpty(modEntry.DisplayNote))
+        if (ModListConfig.Instance.DisplayNoteInTooltip && !string.IsNullOrEmpty(modEntry.DisplayNote))
         {
             builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.Note").Value);
             builder.AppendLine(WrapText(modEntry.DisplayNote));
             builder.AppendLine();
         }
 
-        if (modEntry.Version < latestVersion && Config.Instance.DisplayOutdatedVersionWarn)
+        if (modEntry.Version < latestVersion && ModListConfig.Instance.DisplayOutdatedVersionWarn)
         {
             builder.AppendLine(ExternalLocalizerJpPack.Instance.GetLocalization("ModListTooltip.OutdatedVersionWarn").Value);
             builder.AppendLine();

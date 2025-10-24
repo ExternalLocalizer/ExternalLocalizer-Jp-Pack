@@ -6,7 +6,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
 
-namespace ExternalLocalizerJpPack;
+namespace ExternalLocalizerJpPack.UI;
 
 internal class UIHoverImage : UIImage
 {

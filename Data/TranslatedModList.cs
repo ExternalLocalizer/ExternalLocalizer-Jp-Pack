@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using CsvHelper;
 
-namespace ExternalLocalizerJpPack;
+namespace ExternalLocalizerJpPack.Data;
 
 internal static class TranslatedModList
 {
@@ -76,4 +76,3 @@ internal class CsvEntry
         }
     }
 }
-
