@@ -67,20 +67,23 @@ internal class ModlistPatch : ModSystem
             var uIModItemType = modManager.GetType().Assembly.GetTypeOrThrow("ModManager.Content.ModsList.UIModItemNew");
             MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToModManager(il, uIModItemType));
         }
-        else if (ModLoader.TryGetMod("ModFolder", out Mod modFolder))
-        {
-            // Mod Folder System
-            // https://github.com/TigerChenzzz/TerrariaModFolder
-            var uIModItemType = modFolder.GetType().Assembly.GetTypeOrThrow("ModFolder.UI.UIFolderItems.Mods.UIModItemInFolderLoaded");
-            MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToModFolder(il, uIModItemType));
-            MonoModHooks.Add(uIModItemType.GetMethodOrThrow("get_RightButtonsLength"), (Func<object, int> orig, object instance) => (s_rightButtonsIndex = orig(instance)) + 1);
-        }
         else
         {
-            // Default Mod List
-            // https://github.com/tModLoader/tModLoader
-            var uIModItemType = s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.UI.UIModItem");
-            MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToDefaultModList(il, uIModItemType, left: new StyleDimension(-46, 1f), top: new StyleDimension(0, 0f)));
+            if (ModLoader.TryGetMod("ModFolder", out Mod modFolder))
+            {
+                // Mod Folder System
+                // https://github.com/TigerChenzzz/TerrariaModFolder
+                var uIModItemType = modFolder.GetType().Assembly.GetTypeOrThrow("ModFolder.UI.UIFolderItems.Mods.UIModItemInFolderLoaded");
+                MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToModFolder(il, uIModItemType));
+                MonoModHooks.Add(uIModItemType.GetMethodOrThrow("get_RightButtonsLength"), (Func<object, int> orig, object instance) => (s_rightButtonsIndex = orig(instance)) + 1);
+            }
+
+            {
+                // Default Mod List
+                // https://github.com/tModLoader/tModLoader
+                var uIModItemType = s_tmlAssembly.GetTypeOrThrow("Terraria.ModLoader.UI.UIModItem");
+                MonoModHooks.Modify(uIModItemType.GetMethodOrThrow("OnInitialize"), (il) => AddJapaneseModIconToDefaultModList(il, uIModItemType, left: new StyleDimension(-46, 1f), top: new StyleDimension(0, 0f)));
+            }
         }
     }
 
