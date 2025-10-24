@@ -35,6 +35,7 @@ internal class ModlistPatch : ModSystem
     private static readonly ConditionalWeakTable<UIElement, UIElement> s_iconElements = new();
 
 #pragma warning disable IDE0052
+    // Read by ILCodes
     private static int s_rightButtonsIndex = -1;
 #pragma warning restore IDE0052
 
