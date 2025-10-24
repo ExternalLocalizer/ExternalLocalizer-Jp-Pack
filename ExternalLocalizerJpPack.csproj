@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<AssemblyName>ExternalLocalizerJpPack</AssemblyName>
 		<TargetFramework>net8.0</TargetFramework>
-		<LangVersion>12.0</LangVersion>
+		<LangVersion>preview</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 </Project>

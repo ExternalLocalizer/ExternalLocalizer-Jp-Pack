@@ -15,6 +15,7 @@ internal class Config : ModConfig
     public bool EnableJapaneseModIcon { get; set; }
 
     [DefaultValue(false)]
+    [ReloadRequired]
     public bool EnableOutdatedAlertIcon { get; set; }
 
     [Header("Tooltip")]
