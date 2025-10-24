@@ -2,12 +2,12 @@ using System.ComponentModel;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
-namespace ExternalLocalizerJpPack;
+namespace ExternalLocalizerJpPack.Config;
 
-internal class Config : ModConfig
+internal class ModListConfig : ModConfig
 {
     public override ConfigScope Mode => ConfigScope.ClientSide;
-    public static Config Instance => ModContent.GetInstance<Config>();
+    public static ModListConfig Instance => ModContent.GetInstance<ModListConfig>();
 
     [Header("Icon")]
     [DefaultValue(true)]
@@ -15,6 +15,7 @@ internal class Config : ModConfig
     public bool EnableJapaneseModIcon { get; set; }
 
     [DefaultValue(false)]
+    [ReloadRequired]
     public bool EnableOutdatedAlertIcon { get; set; }
 
     [Header("Tooltip")]
