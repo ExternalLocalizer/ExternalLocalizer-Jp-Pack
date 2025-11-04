@@ -11,7 +11,7 @@ Japanese Packには[url=https://github.com/ExternalLocalizer/TMLHonyaku]TMLHonya
 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2986383249]ExternalLocalizer[/url]と併用することで、簡単にModを日本語化できます。
 
 [h1] 主な対応Mod [/h1]
-大型Modを含む[b]200以上[/b]のModに対応しています。
+大型Modを含む[b]300以上[/b]のModに対応しています。
 [list]
   [*]Calamity Mod
   [*]Thorium Mod
