@@ -3,7 +3,7 @@ Japanese PackにはTMLHonyakuで公開されている日本語化ファイルが
 External Localizerと併用することで、簡単にModを日本語化できます。
 
 ==== 主な対応Mod ====
-大型Modを含む300以上のModに対応しています。
+大型Modを含む400以上のModに対応しています。
  - Calamity Mod
  - Thorium Mod
  - Fargo's Souls Mod
