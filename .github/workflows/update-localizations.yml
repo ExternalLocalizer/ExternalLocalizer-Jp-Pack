@@ -61,7 +61,7 @@ jobs:
 
       - name: Update build.txt
         run: |
-          cat ./build.txt | sed -e "s/^version\s*=\s*$OLD_VERSION/version = $NEW_VERSION/" | tee ./build.txt
+          sed -i -e "s/^version\s*=\s*$OLD_VERSION/version = $NEW_VERSION/" ./build.txt
           git add ./build.txt
 
       - name: Commit
